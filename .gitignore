@@ -2,6 +2,7 @@
 __pycache__/
 *.py[codz]
 *$py.class
+database_encoder_characteristics.pkl
 
 # C extensions
 *.so
