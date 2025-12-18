@@ -1,21 +1,21 @@
 import os
 import pickle
-from encoders import EncoderCharacteristics
 
-
+from configurations import PATH_MEMORY
 
 
 if __name__ == '__main__':
 
-    path_base = os.path.dirname(__file__)
-    path_database = path_base + "/database/database_encoder_characteristics.pkl"
+    if not os.path.exists(PATH_MEMORY):
 
-    if not os.path.exists(path_database):
-
-        with open(path_database, "wb") as f:
+        with open(PATH_MEMORY, "wb") as f:
 
             pickle.dump({}, f, protocol=pickle.HIGHEST_PROTOCOL)
+    
+    from sensory_neuron import EncoderCharacteristics
 
     interaction = input("interaction: ")
 
-    EncoderCharacteristics(path=path_database,characters=interaction).verify_characteristics()
+    data = EncoderCharacteristics(characters=interaction).encoder_characteristics()
+
+    print(data)
