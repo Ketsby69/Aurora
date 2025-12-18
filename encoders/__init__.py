@@ -1,0 +1,1 @@
+from encoders.encoder_characteristics import EncoderCharacteristics
