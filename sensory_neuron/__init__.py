@@ -1,1 +1,1 @@
-from sensory_neuron.encoder_characteristics import EncoderCharacteristics
+from sensory_neuron.encoder_text_characteristics import EncoderTextCharacteristics

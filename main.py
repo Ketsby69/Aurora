@@ -12,10 +12,10 @@ if __name__ == '__main__':
 
             pickle.dump({}, f, protocol=pickle.HIGHEST_PROTOCOL)
     
-    from sensory_neuron import EncoderCharacteristics
+    from sensory_neuron import EncoderTextCharacteristics
 
     interaction = input("interaction: ")
 
-    data = EncoderCharacteristics(characters=interaction).encoder_characteristics()
+    data = EncoderTextCharacteristics(characters=interaction).encoder_characteristics()
 
     print(data)
