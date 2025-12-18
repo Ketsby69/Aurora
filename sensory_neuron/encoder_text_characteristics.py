@@ -7,7 +7,7 @@ from configurations import PATH_MEMORY
 assignment_dict : dict = pickle.load(open(PATH_MEMORY, "rb"))
 
 @dataclass
-class EncoderCharacteristics:
+class EncoderTextCharacteristics:
 
     characters: str
 
@@ -26,8 +26,6 @@ class EncoderCharacteristics:
         if assignment_dict_number != assignment_number:
             with open(PATH_MEMORY, "wb") as f:
                 pickle.dump(assignment_dict, f, protocol=pickle.HIGHEST_PROTOCOL)
-
-        print(assignment_dict)
 
     def encoder_characteristics(self) -> list[list[int]]:
 
