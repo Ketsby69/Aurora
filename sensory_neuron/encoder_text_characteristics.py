@@ -1,48 +1,42 @@
-import pickle
-from dataclasses import dataclass
-import os
+from dataclasses import dataclass, field
+from memory import Memory
 
-from configurations import PATH_MEMORY
+MEMORY_NAME = "memory_characterics.pkl"
 
-assignment_dict : dict = pickle.load(open(PATH_MEMORY, "rb"))
 
 @dataclass
 class EncoderTextCharacteristics:
 
     characters: str
+    memory: Memory = field(default_factory=lambda: Memory(MEMORY_NAME))
+    dict_memory: dict[str, int] = field(init=False)
+
+    def __post_init__(self):
+        self.dict_memory = self.memory.load_memory()
 
     def __verify_characteristics(self) -> None:
 
-        assignment_dict_number: int = len(assignment_dict)
-        list_characters: list = list(self.characters)
-        assignment_number: int = assignment_dict_number
+        next_number = len(self.dict_memory) + 1
+        updated = False
 
-        for character in list_characters:
+        for char in self.characters:
+            if char not in self.dict_memory:
+                self.dict_memory[char] = next_number
+                next_number += 1
+                updated = True
 
-            if character not in assignment_dict:
-                assignment_number += 1
-                assignment_dict[character] =  assignment_number
-        
-        if assignment_dict_number != assignment_number:
-            with open(PATH_MEMORY, "wb") as f:
-                pickle.dump(assignment_dict, f, protocol=pickle.HIGHEST_PROTOCOL)
+        if updated:
+            self.memory.save_memory(self.dict_memory)
 
-    def encoder_characteristics(self) -> list[list[int]]:
+    def encoder_characteristics(self) -> list[int]:
 
         self.__verify_characteristics()
 
-        concepts: list = self.characters.split()
+        vector_concepts: list[int] = []
 
-        vector_concepts: list = list()
+        for word in self.characters.split():
 
-        for x in concepts:
-
-            vector_concept: list = list()
-
-            for y in x:
-
-                vector_concept.append(assignment_dict[y])
-
-            vector_concepts.append(vector_concept)
+            encoded_word = int(''.join(str(self.dict_memory[char]) for char in word))
+            vector_concepts.append(encoded_word)
 
         return vector_concepts

@@ -1,1 +1,0 @@
-from configurations.config_path import PATH_MEMORY
