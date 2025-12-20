@@ -32,7 +32,7 @@ class EncoderTextCharacteristics:
 
         self.__verify_characteristics()
 
-        vector_concepts: list[int] = []
+        vector_concepts = []
 
         for word in self.characters.split():
 

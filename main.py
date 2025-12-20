@@ -1,10 +1,10 @@
-from sensory_neuron import EncoderTextCharacteristics
+from sensory_neuron import SensoryNeurons
 
 
 if __name__ == '__main__':
 
     interaction = input("interaction: ")
 
-    data = EncoderTextCharacteristics(characters=interaction).encoder_characteristics()
+    data = SensoryNeurons(stimulus=interaction).create_sensory_neurons()
 
     print(data)
